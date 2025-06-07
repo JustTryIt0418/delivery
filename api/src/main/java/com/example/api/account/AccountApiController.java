@@ -1,6 +1,7 @@
 package com.example.api.account;
 
 import com.example.api.account.model.AccountMeResponse;
+import com.example.api.common.api.Api;
 import com.example.db.account.AccountEntity;
 import com.example.db.account.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +19,13 @@ public class AccountApiController {
     private final AccountRepository accountRepository;
 
     @GetMapping("/me")
-    public AccountMeResponse me() {
-        return AccountMeResponse.builder()
+    public Api<AccountMeResponse> me() {
+        AccountMeResponse response =AccountMeResponse.builder()
                 .name("홍길동")
                 .email("hong@gmail.com")
                 .registeredAt(LocalDateTime.now())
                 .build();
+
+        return Api.ok(response);
     }
 }

@@ -29,11 +29,10 @@ public class LoggerFilter implements Filter {
         // 필터 체인에 요청과 응답을 전달
         filterChain.doFilter(requestWrapper, responseWrapper);
 
-        // Request 정보
-        Enumeration<String> headerNames = requestWrapper.getHeaderNames();
+        // Request 정보 (원래는 doFilter 이전에 로그를 찍어야 하지만, ContentCachingRequestWrapper가 요청 본문을 읽을 수 있도록 하기 위해 doFilter 이후에 로그를 찍음)
         StringBuilder headerValues = new StringBuilder();
 
-        headerNames.asIterator().forEachRemaining(headerKey -> {
+        requestWrapper.getHeaderNames().asIterator().forEachRemaining(headerKey -> {
             String headerValue = requestWrapper.getHeader(headerKey);
             headerValues.append("[").append(headerKey).append(" : ").append(headerValue).append("] ");
         });
