@@ -12,6 +12,8 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass
 @Data
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseEntity {
 
     @Id

@@ -8,6 +8,6 @@ spring:
       ddl-auto: validate
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/delivery
+    url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
     password: jhpark0418
