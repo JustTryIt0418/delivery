@@ -1,7 +1,9 @@
 package com.example.api.domain.user.controller;
 
 import com.example.api.common.api.Api;
+import com.example.api.domain.token.controller.model.TokenResponse;
 import com.example.api.domain.user.business.UserBusiness;
+import com.example.api.domain.user.controller.model.UserLoginRequest;
 import com.example.api.domain.user.controller.model.UserRegisterRequest;
 import com.example.api.domain.user.controller.model.UserResponse;
 import jakarta.validation.Valid;
@@ -25,6 +27,16 @@ public class UserOpenApiController {
     ) {
         return Api.ok(
                 userBusiness.register(request.getBody())
+        );
+    }
+
+    @PostMapping("/login")
+    public Api<TokenResponse> login(
+            @Valid
+            @RequestBody Api<UserLoginRequest> request
+    ) {
+        return Api.ok(
+                userBusiness.login(request.getBody())
         );
     }
 }

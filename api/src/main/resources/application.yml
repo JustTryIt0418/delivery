@@ -11,3 +11,8 @@ spring:
     url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
     password: jhpark0418
+
+token:
+  secretKey: SpringBootJWTHelperTokenSecretKeyValue123!@#
+  accessTokenPlusHour: 1
+  refreshTokenPlusHour: 12
