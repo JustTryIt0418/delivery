@@ -11,8 +11,6 @@ import com.example.api.domain.user.controller.model.UserRegisterRequest;
 import com.example.api.domain.user.controller.model.UserResponse;
 import com.example.api.domain.user.converter.UserConverter;
 import com.example.api.domain.user.service.UserService;
-import com.example.db.user.UserEntity;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
@@ -39,8 +37,16 @@ public class UserBusiness {
                 .map(it ->
                         userService.getUserWithThrow(it.getEmail(), it.getPassword())
                 )
-                .map(tokenBusiness::issueToken
-                )
+                .map(tokenBusiness::issueToken)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+    }
+
+    public UserResponse me(Long userId) {
+        return Optional.ofNullable(userId)
+                .map(userService::getUserWithThrow)
+                .map(userConverter::toResponse)
+                .orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND));
+
+
     }
 }

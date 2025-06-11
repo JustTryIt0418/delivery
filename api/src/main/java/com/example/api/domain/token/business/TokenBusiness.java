@@ -33,4 +33,16 @@ public class TokenBusiness {
                 })
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
+
+    public Long validationAccessToken (String accessToken) {
+        return Optional.ofNullable(accessToken)
+                .map(tokenService::validationToken)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "Access token is null"));
+    }
+
+    public Long validationRefreshToken (String accessToken) {
+        return Optional.ofNullable(accessToken)
+                .map(tokenService::validationToken)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "Access token is null"));
+    }
 }
